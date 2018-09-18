@@ -18,7 +18,7 @@ def databaseAndTableStart(user_db_name, user_table_name):
         sqlite_file = user_db_name + ".sqlite"
         #table_name1 = 'table1'	 # name of the table to be created
         table_name1 = user_table_name
-        new_field = 'Id_number'  # name of the column
+        new_field = 'Id'  # name of the column
         field_type = 'INTEGER'  # column data type
 
         # Connecting to the database file
@@ -37,4 +37,5 @@ def databaseAndTableStart(user_db_name, user_table_name):
     except Error as e:  # this will prevent the program from crashing if database and table already exist
         print(e)
     finally:
+        c.close()
         conn.close()

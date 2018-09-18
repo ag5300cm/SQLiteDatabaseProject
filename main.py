@@ -26,7 +26,7 @@ def create_connection():
     # create a database connection to a database that resides in the memory
     try:
         conn = sqlite3.connect(db_name_in_use)
-        # TODO find a way to put future code here or somehting
+        # TODO find a way to put future code here or something
         print(sqlite3.version)
     except Error as e:
         print(e)
@@ -34,49 +34,67 @@ def create_connection():
         conn.close()
 
 
-# PRIMARY KEY, Name TEXT, Job TEXT, Salary REAL, Years INTEGER, Children Null  # letting me know the 6 things in the table
-print("To Create database and table enter 'db'.")
-print("Add a row of data to the database table enter 'add'")
-print("To update a row of data enter 'update'")  # todo
-print("Delete a row of data by entering 'del'")  # todo
-print("Display all the rows of table by 'all' ")  #
-print("Display a single row of data be 'solo' ")  #
-user_request = input("Enter input here: ")
-user_request = user_request.lower()
-db_name_in_use = "data"
+# # PRIMARY KEY, Name TEXT, Job TEXT, Salary REAL, Years INTEGER, Children Null  # letting me know the 6 things in the table
+# print("To Create database and table enter 'db'.")
+# print("Add a row of data to the database table enter 'add'")
+# print("To update a row of data enter 'update'")  # todo
+# print("Delete a row of data by entering 'del'")  # todo
+# print("Display all the rows of table by 'all' ")  #
+# print("Display a single row of data be 'solo' ")  #
+# print("Enter 'q' for quit")
+# user_request = input("Enter input here: ")
+# user_request = user_request.lower()
+db_name_in_use = "data8"
 table_name_in_use = "base"
 
 
 
-
-if user_request == 'db':
-    user_db_name = input("Please enter Database name: ")
-    db_name_in_use = db_name_in_use + user_db_name
-    #print(db_name_in_use)  # used for testing code
-    user_table_name = input("Please enter Table name: ")
-    table_name_in_use = table_name_in_use + user_table_name
-    CreateDatabaseAndTable.databaseAndTableStart(user_db_name, user_table_name)
-elif user_request == 'add':
-    #PRIMARY KEY, Name TEXT, Job TEXT, Salary REAL, Years INTEGER, Children Null
-    #primary = input("Enter Primary Key: ")
-    name = input("Enter Name: ")
-    job_description = input("Enter occupation: ")
-    salary = input("Enter salary: ")
-    years_employed = input("Enter year employed here: ")
-    children = input("Enter number of children: ")
-    AddDataToRowInTable.add_row_of_data(db_name_in_use, table_name_in_use, name, job_description, salary, years_employed, children)
-elif user_request == 'update':
-    pass
-elif user_request == 'del':
-    pass
-elif user_request == 'all':
-    ReadFromDatabase.read_all_from_database(db_name_in_use)
-elif user_request == 'solo':
-    choose_search_type = str(input("Choose search type: PRIMARY KEY, Name, Job, Salary, Years, Children: "))
-    search_value = input("Enter specific value: ")
-    ReadFromDatabase.read_from_database_search(db_name_in_use, choose_search_type, search_value)
-else:
+loopMe = True
+while loopMe:
+    # PRIMARY KEY, Name TEXT, Job TEXT, Salary REAL, Years INTEGER, Children Null  # letting me know the 6 things in the table
+    print("To Create database and table enter 'db'.")
+    print("Add a row of data to the database table enter 'add'")
+    print("To update a row of data enter 'update'")  # todo
+    print("Delete a row of data by entering 'del'")  # todo
+    print("Display all the rows of table by 'all' ")  #
+    print("Display a single row of data be 'solo' ")  #
+    print("Enter 'q' for quit")
     user_request = input("Enter input here: ")
+    user_request = user_request.lower()
+
+    if user_request == 'db':
+        user_db_name = input("Please enter Database name: ")
+        db_name_in_use = db_name_in_use + user_db_name
+        #print(db_name_in_use)  # used for testing code
+        user_table_name = input("Please enter Table name: ")
+        table_name_in_use = user_table_name
+        CreateDatabaseAndTable.databaseAndTableStart(user_db_name, user_table_name)
+    elif user_request == 'add':
+        #PRIMARY KEY, Name TEXT, Job TEXT, Salary REAL, Years INTEGER, Children Null
+        primary = input("Enter Primary Key: ")
+        name = input("Enter Name: ")
+        job_description = input("Enter occupation: ")
+        salary = input("Enter salary: ")
+        years_employed = input("Enter year employed here: ")
+        children = input("Enter number of children: ")
+        AddDataToRowInTable.add_row_of_data(db_name_in_use, table_name_in_use, primary, name, job_description, salary, years_employed, children)
+    elif user_request == 'update':
+        primary = input("Enter Primary Key that need update: ")
+        #choose_type = str(input("Choose type: Id, Name, Job, Salary, Years, Children: "))
+        update_data = input("Enter update data: ")
+        AddDataToRowInTable.update_row_of_data(db_name_in_use, table_name_in_use, primary, update_data)
+    elif user_request == 'del':
+        pass
+    elif user_request == 'all':
+        ReadFromDatabase.read_all_from_database(db_name_in_use)
+    elif user_request == 'solo':
+        choose_search_type = str(input("Choose search type: Id, Name, Job, Salary, Years, Children: "))
+        search_value = input("Enter specific value: ")
+        ReadFromDatabase.read_from_database_search(db_name_in_use, choose_search_type, search_value)
+    elif user_request == 'q':
+        exit(0)
+    else:
+        loopMe = True
 
 
 
