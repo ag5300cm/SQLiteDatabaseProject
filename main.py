@@ -15,6 +15,7 @@ from sqlite3 import Error
 import CreateDatabaseAndTable
 import AddDataToRowInTable
 import ReadFromDatabase
+import DeleteDataBeCareful
 
 try:
     import tkinter
@@ -37,7 +38,7 @@ def create_connection():
 # # PRIMARY KEY, Name TEXT, Job TEXT, Salary REAL, Years INTEGER, Children Null  # letting me know the 6 things in the table
 # print("To Create database and table enter 'db'.")
 # print("Add a row of data to the database table enter 'add'")
-# print("To update a row of data enter 'update'")  # todo
+# print("To update a row of data enter 'update'")  #
 # print("Delete a row of data by entering 'del'")  # todo
 # print("Display all the rows of table by 'all' ")  #
 # print("Display a single row of data be 'solo' ")  #
@@ -54,7 +55,7 @@ while loopMe:
     # PRIMARY KEY, Name TEXT, Job TEXT, Salary REAL, Years INTEGER, Children Null  # letting me know the 6 things in the table
     print("To Create database and table enter 'db'.")
     print("Add a row of data to the database table enter 'add'")
-    print("To update a row of data enter 'update'")  # todo
+    print("To update a row of data enter 'update'")  #
     print("Delete a row of data by entering 'del'")  # todo
     print("Display all the rows of table by 'all' ")  #
     print("Display a single row of data be 'solo' ")  #
@@ -80,17 +81,18 @@ while loopMe:
         AddDataToRowInTable.add_row_of_data(db_name_in_use, table_name_in_use, primary, name, job_description, salary, years_employed, children)
     elif user_request == 'update':
         primary = input("Enter Primary Key that need update: ")
-        #choose_type = str(input("Choose type: Id, Name, Job, Salary, Years, Children: "))
+        choose_type = str(input("Choose type: Id, Name, Job, Salary, Years, Children: "))
         update_data = input("Enter update data: ")
-        AddDataToRowInTable.update_row_of_data(db_name_in_use, table_name_in_use, primary, update_data)
+        AddDataToRowInTable.update_row_of_data(db_name_in_use, table_name_in_use, primary, choose_type, update_data)
     elif user_request == 'del':
-        pass
+        primaryDelete = input("Enter Primary Key that need delete: ")
+        DeleteDataBeCareful.deleteARowFromTable(db_name_in_use, table_name_in_use, primaryDelete)
     elif user_request == 'all':
         ReadFromDatabase.read_all_from_database(db_name_in_use)
     elif user_request == 'solo':
         choose_search_type = str(input("Choose search type: Id, Name, Job, Salary, Years, Children: "))
         search_value = input("Enter specific value: ")
-        ReadFromDatabase.read_from_database_search(db_name_in_use, choose_search_type, search_value)
+        ReadFromDatabase.read_from_database_search(db_name_in_use,  choose_search_type, search_value)
     elif user_request == 'q':
         exit(0)
     else:
