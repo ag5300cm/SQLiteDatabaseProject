@@ -17,11 +17,6 @@ import AddDataToRowInTable
 import ReadFromDatabase
 import DeleteDataBeCareful
 
-try:
-    import tkinter
-except ImportError:
-    print("No GUI option")
-
 
 def create_connection():
     # create a database connection to a database that resides in the memory
@@ -35,16 +30,6 @@ def create_connection():
         conn.close()
 
 
-# # PRIMARY KEY, Name TEXT, Job TEXT, Salary REAL, Years INTEGER, Children Null  # letting me know the 6 things in the table
-# print("To Create database and table enter 'db'.")
-# print("Add a row of data to the database table enter 'add'")
-# print("To update a row of data enter 'update'")  #
-# print("Delete a row of data by entering 'del'")  # todo
-# print("Display all the rows of table by 'all' ")  #
-# print("Display a single row of data be 'solo' ")  #
-# print("Enter 'q' for quit")
-# user_request = input("Enter input here: ")
-# user_request = user_request.lower()
 db_name_in_use = "data8"
 table_name_in_use = "base"
 
@@ -56,7 +41,7 @@ while loopMe:
     print("To Create database and table enter 'db'.")
     print("Add a row of data to the database table enter 'add'")
     print("To update a row of data enter 'update'")  #
-    print("Delete a row of data by entering 'del'")  # todo
+    print("Delete a row of data by entering 'del'")  #
     print("Display all the rows of table by 'all' ")  #
     print("Display a single row of data be 'solo' ")  #
     print("Enter 'q' for quit")
