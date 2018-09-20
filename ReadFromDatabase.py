@@ -12,7 +12,8 @@ def read_all_from_database(db_name_in_use, table_name_in_use):
     all_info = c.fetchall()
     #print(all_info)
     for row in all_info:
-        print(row)
+        print("Id = " + str(row[0]), "Name: " + row[1], "Occupation: " + row[2], "Salary: " + str(row[3]),
+              "Years employed: " + str(row[4]), "Children: " + str(row[5]))
 
     c.close()
     conn.close()
