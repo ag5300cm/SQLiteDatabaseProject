@@ -18,21 +18,8 @@ import ReadFromDatabase
 import DeleteDataBeCareful
 
 
-def create_connection():
-    # create a database connection to a database that resides in the memory
-    try:
-        conn = sqlite3.connect(db_name_in_use)
-        # TODO find a way to put future code here or something
-        print(sqlite3.version)
-    except Error as e:
-        print(e)
-    finally:
-        conn.close()
-
-
-db_name_in_use = "data8"
-table_name_in_use = "base"
-
+db_name_in_use = ""  # currently using data8
+table_name_in_use = ""  # currently using base
 
 
 loopMe = True
@@ -44,6 +31,7 @@ while loopMe:
     print("Delete a row of data by entering 'del'")  #
     print("Display all the rows of table by 'all' ")  #
     print("Display a single row of data be 'solo' ")  #
+    print("To set database and table name in use enter 'set")
     print("Enter 'q' for quit")
     user_request = input("Enter input here: ")
     user_request = user_request.lower()
@@ -73,13 +61,18 @@ while loopMe:
         primaryDelete = input("Enter Primary Key that need delete: ")
         DeleteDataBeCareful.deleteARowFromTable(db_name_in_use, table_name_in_use, primaryDelete)
     elif user_request == 'all':
-        ReadFromDatabase.read_all_from_database(db_name_in_use)
+        ReadFromDatabase.read_all_from_database(db_name_in_use, table_name_in_use)
     elif user_request == 'solo':
         choose_search_type = str(input("Choose search type: Id, Name, Job, Salary, Years, Children: "))
         search_value = input("Enter specific value: ")
-        ReadFromDatabase.read_from_database_search(db_name_in_use,  choose_search_type, search_value)
+        ReadFromDatabase.read_from_database_search(db_name_in_use, table_name_in_use, choose_search_type, search_value)
     elif user_request == 'q':
         exit(0)
+    elif user_request == 'set':
+        print("Current database in use is: " + db_name_in_use)
+        print("Current table in use is: " + table_name_in_use)
+        db_name_in_use = input("Set database in use: ")
+        table_name_in_use = input("Set table in use: ")
     else:
         loopMe = True
 

@@ -3,12 +3,12 @@ import sqlite3
 from sqlite3 import Error
 
 
-def read_all_from_database(db_name_in_use):
+def read_all_from_database(db_name_in_use, table_name_in_use):
 
-    conn = sqlite3.connect(db_name_in_use + ".sqlite")  # Todo change to variable so will user database user wants
+    conn = sqlite3.connect(db_name_in_use + ".sqlite")  #
     c = conn.cursor()
 
-    c.execute('SELECT * FROM base')  # TODO make base a variable
+    c.execute('SELECT * FROM ' + table_name_in_use)  #
     all_info = c.fetchall()
     #print(all_info)
     for row in all_info:
@@ -18,13 +18,13 @@ def read_all_from_database(db_name_in_use):
     conn.close()
 
 
-def read_from_database_search(db_name_in_use, choose_search_type, search_value):
+def read_from_database_search(db_name_in_use, table_name_in_use, choose_search_type, search_value):
 
     conn = sqlite3.connect(db_name_in_use + ".sqlite")  #
     c = conn.cursor()
-    table_name = 'base'  # todo change base to whatever variable the user wants
+    table_name = table_name_in_use  #
 
-    try:  # todo change base to whatever variable the user wants
+    try:  #
             c.execute("SELECT * FROM {tn} WHERE {idf}={my_id}".\
                     format(tn=table_name,  idf=choose_search_type, my_id=search_value))
             id_exists = c.fetchall()

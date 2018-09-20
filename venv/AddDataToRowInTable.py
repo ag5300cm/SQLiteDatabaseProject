@@ -12,7 +12,7 @@ def add_row_of_data(db_name_in_use, table_name_in_use, primary, name, job_descri
 
     try:
         #insert_statement = ("INSERT INTO 6Columns (primary, name, job_description, salary, years_employed, children) VALUES (?, ?, ?, ?, ?, ? )")
-        c.execute("INSERT INTO base (Id, Name, Job, Salary, Years, Children) VALUES (?, ?, ?, ?, ?, ? )",
+        c.execute("INSERT INTO " + table_name_in_use +" (Id, Name, Job, Salary, Years, Children) VALUES (?, ?, ?, ?, ?, ? )",
                   (primary, name, job_description, salary, years_employed, children))
         #c.execute(insert_statement, (primary, name, job_description, salary, years_employed, children))
         conn.commit()
